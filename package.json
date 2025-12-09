@@ -166,7 +166,7 @@
     "@microsoft/signalr": "8.0.7",
     "@microsoft/signalr-protocol-msgpack": "8.0.7",
     "@ng-select/ng-select": "20.7.0",
-    "@nx/devkit": "21.6.9",
+    "@nx/devkit": "22.2.0",
     "@nx/eslint": "21.6.9",
     "@nx/jest": "21.6.9",
     "@nx/js": "21.6.9",
