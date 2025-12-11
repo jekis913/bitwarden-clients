@@ -130,7 +130,7 @@ dependencies = [
  "enumflags2",
  "futures-channel",
  "futures-util",
- "rand 0.9.1",
+ "rand 0.9.2",
  "serde",
  "serde_repr",
  "tokio",
