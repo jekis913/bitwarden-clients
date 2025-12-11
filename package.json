@@ -40,7 +40,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "20.3.12",
     "@angular-eslint/schematics": "20.7.0",
-    "@angular/cli": "20.3.12",
+    "@angular/cli": "20.3.13",
     "@angular/compiler-cli": "20.3.15",
     "@babel/core": "7.28.5",
     "@babel/preset-env": "7.28.5",
@@ -99,7 +99,7 @@
     "electron-reload": "2.0.0-alpha.1",
     "electron-store": "8.2.0",
     "electron-updater": "6.7.2",
-    "eslint": "9.26.0",
+    "eslint": "9.27.0",
     "eslint-config-prettier": "10.1.2",
     "eslint-import-resolver-typescript": "4.3.4",
     "eslint-plugin-import": "2.31.0",
