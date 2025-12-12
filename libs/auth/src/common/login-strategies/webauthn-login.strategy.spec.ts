@@ -216,6 +216,7 @@ describe("WebAuthnLoginStrategy", () => {
 
     expect(authResult).toBeInstanceOf(AuthResult);
     expect(authResult).toMatchObject({
+      resetMasterPassword: false,
       twoFactorProviders: null,
       requiresTwoFactor: false,
     });

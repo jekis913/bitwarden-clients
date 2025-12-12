@@ -13,7 +13,6 @@ import {
   SsoLoginCredentials,
   SsoUrlService,
   UserApiLoginCredentials,
-  UserDecryptionOptionsServiceAbstraction,
 } from "@bitwarden/auth/common";
 import { OrganizationService } from "@bitwarden/common/admin-console/abstractions/organization/organization.service.abstraction";
 import { PolicyApiServiceAbstraction } from "@bitwarden/common/admin-console/abstractions/policy/policy-api.service.abstraction";
@@ -83,7 +82,6 @@ export class LoginCommand {
     protected ssoUrlService: SsoUrlService,
     protected i18nService: I18nService,
     protected masterPasswordService: MasterPasswordServiceAbstraction,
-    protected userDecryptionOptionsService: UserDecryptionOptionsServiceAbstraction,
     protected encryptedMigrator: EncryptedMigrator,
   ) {}
 
@@ -222,28 +220,6 @@ export class LoginCommand {
             twoFactor,
           ),
         );
-
-        const userDecryptionOptions = await firstValueFrom(
-          this.userDecryptionOptionsService.userDecryptionOptionsById$(response.userId),
-        );
-
-        const notUsingTrustedDeviceEncryption = !userDecryptionOptions.trustedDeviceOption;
-        const notUsingKeyConnector = !userDecryptionOptions.keyConnectorOption;
-
-        if (
-          notUsingTrustedDeviceEncryption &&
-          notUsingKeyConnector &&
-          !userDecryptionOptions.hasMasterPassword
-        ) {
-          // If user is in an org that is using MP encryption and they JIT provisioned but
-          // have not yet set a MP and come to the CLI to login, they won't be able to unlock
-          // or set a MP in the CLI as it isn't supported.
-          await this.logoutCallback();
-          return Response.error(
-            "In order to log in with SSO from the CLI, you must first log in" +
-              " through the web vault, the desktop, or the extension to set your master password.",
-          );
-        }
       } else {
         response = await this.loginStrategyService.logIn(
           new PasswordLoginCredentials(email, password, twoFactor),
@@ -383,6 +359,13 @@ export class LoginCommand {
       // We check response two factor again here since MFA could fail based on the logic on ln 226
       if (response.requiresTwoFactor) {
         return Response.error("Login failed.");
+      }
+
+      if (response.resetMasterPassword) {
+        return Response.error(
+          "In order to log in with SSO from the CLI, you must first log in" +
+            " through the web vault to set your master password.",
+        );
       }
 
       // Check if Key Connector domain confirmation is required
