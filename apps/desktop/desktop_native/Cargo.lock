@@ -740,29 +740,13 @@ dependencies = [
 
 [[package]]
 name = "ctor"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67773048316103656a637612c4a62477603b777d91d9c62ff2290f9cde178fdb"
-dependencies = [
- "ctor-proc-macro 0.0.6",
- "dtor",
-]
-
-[[package]]
-name = "ctor"
 version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "424e0138278faeb2b401f174ad17e715c829512d74f3d1e81eb43365c2e0590e"
 dependencies = [
- "ctor-proc-macro 0.0.7",
+ "ctor-proc-macro",
  "dtor",
 ]
-
-[[package]]
-name = "ctor-proc-macro"
-version = "0.0.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e2931af7e13dc045d8e9d26afccc6fa115d64e115c9c84b1166288b46f6782c2"
 
 [[package]]
 name = "ctor-proc-macro"
@@ -1848,7 +1832,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3af30fe8e799dda3a555c496c59e960e4cff1e931b63acbaf3a3b25d9fad22b6"
 dependencies = [
  "bitflags",
- "ctor 0.6.3",
+ "ctor",
  "futures",
  "napi-build",
  "napi-sys",
@@ -1870,7 +1854,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "47cffa09ea668c4cc5d7b1198780882e28780ed1804a903b80680725426223d9"
 dependencies = [
  "convert_case",
- "ctor 0.6.3",
+ "ctor",
  "napi-derive-backend",
  "proc-macro2",
  "quote",
@@ -2481,7 +2465,7 @@ dependencies = [
 name = "process_isolation"
 version = "0.0.0"
 dependencies = [
- "ctor 0.5.0",
+ "ctor",
  "desktop_core",
  "libc",
  "tracing",
@@ -2865,14 +2849,15 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.127"
+version = "1.0.145"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8043c06d9f82bd7271361ed64f415fe5e12a77fdb52e573e7f06a516dea329ad"
+checksum = "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c"
 dependencies = [
  "itoa",
  "memchr",
  "ryu",
  "serde",
+ "serde_core",
 ]
 
 [[package]]
