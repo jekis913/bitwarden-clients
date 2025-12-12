@@ -62,7 +62,6 @@ const LOGGED_OUT_INFO: AccountInfo = {
   email: "",
   emailVerified: false,
   name: undefined,
-  creationDate: undefined,
 };
 
 /**
@@ -166,10 +165,6 @@ export class AccountServiceImplementation implements InternalAccountService {
 
   async setAccountEmailVerified(userId: UserId, emailVerified: boolean): Promise<void> {
     await this.setAccountInfo(userId, { emailVerified });
-  }
-
-  async setAccountCreationDate(userId: UserId, creationDate: string): Promise<void> {
-    await this.setAccountInfo(userId, { creationDate });
   }
 
   async clean(userId: UserId) {

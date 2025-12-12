@@ -8,13 +8,12 @@ import { OrganizationUserApiService } from "@bitwarden/admin-console/common";
 // eslint-disable-next-line no-restricted-imports
 import { KeyService } from "@bitwarden/key-management";
 
-import { mockAccountInfoWith } from "../../../spec/fake-account-service";
 import { OrganizationApiServiceAbstraction } from "../../admin-console/abstractions/organization/organization-api.service.abstraction";
 import { OrganizationAutoEnrollStatusResponse } from "../../admin-console/models/response/organization-auto-enroll-status.response";
 import { EncryptService } from "../../key-management/crypto/abstractions/encrypt.service";
 import { I18nService } from "../../platform/abstractions/i18n.service";
 import { UserId } from "../../types/guid";
-import { Account, AccountService } from "../abstractions/account.service";
+import { Account, AccountInfo, AccountService } from "../abstractions/account.service";
 
 import { PasswordResetEnrollmentServiceImplementation } from "./password-reset-enrollment.service.implementation";
 
@@ -97,10 +96,11 @@ describe("PasswordResetEnrollmentServiceImplementation", () => {
       const encryptedKey = { encryptedString: "encryptedString" };
       organizationApiService.getKeys.mockResolvedValue(orgKeyResponse as any);
 
-      const user1AccountInfo = mockAccountInfoWith({
+      const user1AccountInfo: AccountInfo = {
         name: "Test User 1",
         email: "test1@email.com",
-      });
+        emailVerified: true,
+      };
       activeAccountSubject.next(Object.assign(user1AccountInfo, { id: "userId" as UserId }));
 
       keyService.userKey$.mockReturnValue(of({ key: "key" } as any));

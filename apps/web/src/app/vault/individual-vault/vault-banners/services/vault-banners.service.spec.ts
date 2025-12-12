@@ -2,18 +2,14 @@ import { TestBed } from "@angular/core/testing";
 import { BehaviorSubject, firstValueFrom, take, timeout } from "rxjs";
 
 import { AuthRequestServiceAbstraction } from "@bitwarden/auth/common";
-import { AccountService } from "@bitwarden/common/auth/abstractions/account.service";
+import { AccountInfo, AccountService } from "@bitwarden/common/auth/abstractions/account.service";
 import { AuthRequestResponse } from "@bitwarden/common/auth/models/response/auth-request.response";
 import { BillingAccountProfileStateService } from "@bitwarden/common/billing/abstractions/account/billing-account-profile-state.service";
 import { DeviceType } from "@bitwarden/common/enums";
 import { PlatformUtilsService } from "@bitwarden/common/platform/abstractions/platform-utils.service";
 import { Utils } from "@bitwarden/common/platform/misc/utils";
 import { StateProvider } from "@bitwarden/common/platform/state";
-import {
-  FakeStateProvider,
-  mockAccountServiceWith,
-  mockAccountInfoWith,
-} from "@bitwarden/common/spec";
+import { FakeStateProvider, mockAccountServiceWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 import { SyncService } from "@bitwarden/common/vault/abstractions/sync/sync.service.abstraction";
 
@@ -31,11 +27,8 @@ describe("VaultBannersService", () => {
   const fakeStateProvider = new FakeStateProvider(mockAccountServiceWith(userId));
   const getEmailVerified = jest.fn().mockResolvedValue(true);
   const lastSync$ = new BehaviorSubject<Date | null>(null);
-  const accounts$ = new BehaviorSubject({
-    [userId]: mockAccountInfoWith({
-      email: "test@bitwarden.com",
-      name: "name",
-    }),
+  const accounts$ = new BehaviorSubject<Record<UserId, AccountInfo>>({
+    [userId]: { email: "test@bitwarden.com", emailVerified: true, name: "name" } as AccountInfo,
   });
   const pendingAuthRequests$ = new BehaviorSubject<Array<AuthRequestResponse>>([]);
 

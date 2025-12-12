@@ -6,7 +6,6 @@ import { KeyGenerationService } from "@bitwarden/common/key-management/crypto";
 import { EncryptService } from "@bitwarden/common/key-management/crypto/abstractions/encrypt.service";
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
 import { Utils } from "@bitwarden/common/platform/misc/utils";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { emptyGuid, OrganizationId } from "@bitwarden/common/types/guid";
 import { OrgKey, UserKey } from "@bitwarden/common/types/key";
 import { CipherService } from "@bitwarden/common/vault/abstractions/cipher.service";
@@ -42,10 +41,9 @@ describe("BitwardenPasswordProtectedImporter", () => {
 
     accountService.activeAccount$ = of({
       id: emptyGuid as UserId,
-      ...mockAccountInfoWith({
-        email: "test@example.com",
-        name: "Test User",
-      }),
+      email: "test@example.com",
+      emailVerified: true,
+      name: "Test User",
     });
 
     const mockOrgId = emptyGuid as OrganizationId;
@@ -98,10 +96,9 @@ describe("BitwardenPasswordProtectedImporter", () => {
     beforeEach(() => {
       accountService.activeAccount$ = of({
         id: emptyGuid as UserId,
-        ...mockAccountInfoWith({
-          email: "test@example.com",
-          name: "Test User",
-        }),
+        email: "test@example.com",
+        emailVerified: true,
+        name: "Test User",
       });
       importer = new BitwardenPasswordProtectedImporter(
         keyService,

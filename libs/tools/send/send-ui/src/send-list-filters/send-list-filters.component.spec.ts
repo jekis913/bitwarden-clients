@@ -8,7 +8,6 @@ import { JslibModule } from "@bitwarden/angular/jslib.module";
 import { AccountService } from "@bitwarden/common/auth/abstractions/account.service";
 import { BillingAccountProfileStateService } from "@bitwarden/common/billing/abstractions";
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 import { ChipSelectComponent } from "@bitwarden/components";
 
@@ -32,11 +31,9 @@ describe("SendListFiltersComponent", () => {
 
     accountService.activeAccount$ = of({
       id: userId,
-      ...mockAccountInfoWith({
-        email: "test@email.com",
-        name: "Test User",
-        emailVerified: true,
-      }),
+      email: "test@email.com",
+      emailVerified: true,
+      name: "Test User",
     });
     billingAccountProfileStateService.hasPremiumFromAnySource$.mockReturnValue(of(true));
 

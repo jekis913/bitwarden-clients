@@ -8,9 +8,9 @@ import {
   FakeAccountService,
   FakeStateProvider,
   mockAccountServiceWith,
-  mockAccountInfoWith,
 } from "../../../../spec";
 import { ApiService } from "../../../abstractions/api.service";
+import { AccountInfo } from "../../../auth/abstractions/account.service";
 import { UserId } from "../../../types/guid";
 import { ConfigService } from "../../abstractions/config/config.service";
 import { Environment, EnvironmentService } from "../../abstractions/environment.service";
@@ -76,10 +76,7 @@ describe("DefaultRegisterSdkService", () => {
           .calledWith(userId)
           .mockReturnValue(new BehaviorSubject(mock<Environment>()));
         accountService.accounts$ = of({
-          [userId]: mockAccountInfoWith({
-            email: "email",
-            name: "name",
-          }),
+          [userId]: { email: "email", emailVerified: true, name: "name" } as AccountInfo,
         });
       });
 
@@ -128,10 +125,7 @@ describe("DefaultRegisterSdkService", () => {
 
       it("destroys the internal SDK client when the account is removed (logout)", async () => {
         const accounts$ = new BehaviorSubject({
-          [userId]: mockAccountInfoWith({
-            email: "email",
-            name: "name",
-          }),
+          [userId]: { email: "email", emailVerified: true, name: "name" } as AccountInfo,
         });
         accountService.accounts$ = accounts$;
 

@@ -2,10 +2,9 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { BehaviorSubject } from "rxjs";
 
-import { AccountService } from "@bitwarden/common/auth/abstractions/account.service";
+import { AccountInfo, AccountService } from "@bitwarden/common/auth/abstractions/account.service";
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
 import { LogService } from "@bitwarden/common/platform/abstractions/log.service";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 import { FolderApiServiceAbstraction } from "@bitwarden/common/vault/abstractions/folder/folder-api.service.abstraction";
 import { FolderService } from "@bitwarden/common/vault/abstractions/folder/folder.service.abstraction";
@@ -48,7 +47,11 @@ describe("AddEditFolderDialogComponent", () => {
     showToast.mockClear();
 
     const userId = "" as UserId;
-    const accountInfo = mockAccountInfoWith();
+    const accountInfo: AccountInfo = {
+      email: "",
+      emailVerified: true,
+      name: undefined,
+    };
 
     await TestBed.configureTestingModule({
       imports: [AddEditFolderDialogComponent, NoopAnimationsModule],

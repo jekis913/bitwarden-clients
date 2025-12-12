@@ -7,7 +7,6 @@ import { EncryptService } from "@bitwarden/common/key-management/crypto/abstract
 import { EncString } from "@bitwarden/common/key-management/crypto/models/enc-string";
 import { Utils } from "@bitwarden/common/platform/misc/utils";
 import { SymmetricCryptoKey } from "@bitwarden/common/platform/models/domain/symmetric-crypto-key";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { CsprngArray } from "@bitwarden/common/types/csprng";
 import { OrganizationId, UserId } from "@bitwarden/common/types/guid";
 import { OrgKey } from "@bitwarden/common/types/key";
@@ -39,11 +38,9 @@ describe("SecretsManagerPortingApiService", () => {
   let accountService: MockProxy<AccountService>;
   const activeAccountSubject = new BehaviorSubject<{ id: UserId } & AccountInfo>({
     id: "testId" as UserId,
-    ...mockAccountInfoWith({
-      email: "test@example.com",
-      name: "Test User",
-      emailVerified: true,
-    }),
+    email: "test@example.com",
+    emailVerified: true,
+    name: "Test User",
   });
 
   beforeEach(() => {

@@ -8,7 +8,6 @@ import { MasterPasswordApiService } from "@bitwarden/common/auth/abstractions/ma
 import { EncString } from "@bitwarden/common/key-management/crypto/models/enc-string";
 import { InternalMasterPasswordServiceAbstraction } from "@bitwarden/common/key-management/master-password/abstractions/master-password.service.abstraction";
 import { SymmetricCryptoKey } from "@bitwarden/common/platform/models/domain/symmetric-crypto-key";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 import { MasterKey, UserKey } from "@bitwarden/common/types/key";
 import { KeyService, PBKDF2KdfConfig } from "@bitwarden/key-management";
@@ -27,11 +26,9 @@ describe("DefaultChangePasswordService", () => {
 
   const user: Account = {
     id: userId,
-    ...mockAccountInfoWith({
-      email: "email",
-      name: "name",
-      emailVerified: false,
-    }),
+    email: "email",
+    emailVerified: false,
+    name: "name",
   };
 
   const passwordInputResult: PasswordInputResult = {

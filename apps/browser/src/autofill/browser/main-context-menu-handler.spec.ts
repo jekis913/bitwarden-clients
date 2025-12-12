@@ -18,7 +18,6 @@ import { AutofillSettingsServiceAbstraction } from "@bitwarden/common/autofill/s
 import { BillingAccountProfileStateService } from "@bitwarden/common/billing/abstractions/account/billing-account-profile-state.service";
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
 import { LogService } from "@bitwarden/common/platform/abstractions/log.service";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 import { CipherType } from "@bitwarden/common/vault/enums";
 import { Cipher } from "@bitwarden/common/vault/models/domain/cipher";
@@ -124,10 +123,9 @@ describe("context-menu", () => {
     autofillSettingsService.enableContextMenu$ = of(true);
     accountService.activeAccount$ = of({
       id: "userId" as UserId,
-      ...mockAccountInfoWith({
-        email: "",
-        name: undefined,
-      }),
+      email: "",
+      emailVerified: false,
+      name: undefined,
     });
   });
 

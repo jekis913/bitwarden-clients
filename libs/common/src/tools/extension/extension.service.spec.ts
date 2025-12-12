@@ -1,12 +1,7 @@
 import { mock } from "jest-mock-extended";
 import { BehaviorSubject, firstValueFrom } from "rxjs";
 
-import {
-  FakeAccountService,
-  FakeStateProvider,
-  awaitAsync,
-  mockAccountInfoWith,
-} from "../../../spec";
+import { FakeAccountService, FakeStateProvider, awaitAsync } from "../../../spec";
 import { Account } from "../../auth/abstractions/account.service";
 import { EXTENSION_DISK, UserKeyDefinition } from "../../platform/state";
 import { UserId } from "../../types/guid";
@@ -26,10 +21,9 @@ import { SimpleLogin } from "./vendor/simplelogin";
 const SomeUser = "some user" as UserId;
 const SomeAccount = {
   id: SomeUser,
-  ...mockAccountInfoWith({
-    email: "someone@example.com",
-    name: "Someone",
-  }),
+  email: "someone@example.com",
+  emailVerified: true,
+  name: "Someone",
 };
 const SomeAccount$ = new BehaviorSubject<Account>(SomeAccount);
 

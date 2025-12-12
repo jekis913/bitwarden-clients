@@ -11,7 +11,6 @@ import { MasterPasswordUnlockService } from "@bitwarden/common/key-management/ma
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
 import { LogService } from "@bitwarden/common/platform/abstractions/log.service";
 import { SymmetricCryptoKey } from "@bitwarden/common/platform/models/domain/symmetric-crypto-key";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserKey } from "@bitwarden/common/types/key";
 import {
   AsyncActionsModule,
@@ -40,10 +39,9 @@ describe("MasterPasswordLockComponent", () => {
   const mockMasterPassword = "testExample";
   const activeAccount: Account = {
     id: "user-id" as UserId,
-    ...mockAccountInfoWith({
-      email: "user@example.com",
-      name: "User",
-    }),
+    email: "user@example.com",
+    emailVerified: true,
+    name: "User",
   };
   const mockUserKey = new SymmetricCryptoKey(new Uint8Array(64)) as UserKey;
 

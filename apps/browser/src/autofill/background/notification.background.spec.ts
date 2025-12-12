@@ -4,7 +4,7 @@ import { BehaviorSubject, firstValueFrom, of } from "rxjs";
 import { CollectionService } from "@bitwarden/admin-console/common";
 import { OrganizationService } from "@bitwarden/common/admin-console/abstractions/organization/organization.service.abstraction";
 import { PolicyService } from "@bitwarden/common/admin-console/abstractions/policy/policy.service.abstraction";
-import { AccountService } from "@bitwarden/common/auth/abstractions/account.service";
+import { AccountInfo, AccountService } from "@bitwarden/common/auth/abstractions/account.service";
 import { AuthenticationStatus } from "@bitwarden/common/auth/enums/authentication-status";
 import { AuthService } from "@bitwarden/common/auth/services/auth.service";
 import { ExtensionCommand } from "@bitwarden/common/autofill/constants";
@@ -17,7 +17,6 @@ import { MessagingService } from "@bitwarden/common/platform/abstractions/messag
 import { ThemeTypes } from "@bitwarden/common/platform/enums";
 import { SelfHostedEnvironment } from "@bitwarden/common/platform/services/default-environment.service";
 import { ThemeStateService } from "@bitwarden/common/platform/theming/theme-state.service";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 import { CipherRepromptType } from "@bitwarden/common/vault/enums/cipher-reprompt-type";
 import { CipherView } from "@bitwarden/common/vault/models/view/cipher.view";
@@ -81,12 +80,11 @@ describe("NotificationBackground", () => {
   const organizationService = mock<OrganizationService>();
 
   const userId = "testId" as UserId;
-  const activeAccountSubject = new BehaviorSubject({
+  const activeAccountSubject = new BehaviorSubject<{ id: UserId } & AccountInfo>({
     id: userId,
-    ...mockAccountInfoWith({
-      email: "test@example.com",
-      name: "Test User",
-    }),
+    email: "test@example.com",
+    emailVerified: true,
+    name: "Test User",
   });
 
   beforeEach(() => {

@@ -12,9 +12,9 @@ import {
   FakeAccountService,
   FakeStateProvider,
   mockAccountServiceWith,
-  mockAccountInfoWith,
 } from "../../../../spec";
 import { ApiService } from "../../../abstractions/api.service";
+import { AccountInfo } from "../../../auth/abstractions/account.service";
 import { EncryptedString } from "../../../key-management/crypto/models/enc-string";
 import { UserId } from "../../../types/guid";
 import { UserKey } from "../../../types/key";
@@ -92,10 +92,7 @@ describe("DefaultSdkService", () => {
           .calledWith(userId)
           .mockReturnValue(new BehaviorSubject(mock<Environment>()));
         accountService.accounts$ = of({
-          [userId]: mockAccountInfoWith({
-            email: "email",
-            name: "name",
-          }),
+          [userId]: { email: "email", emailVerified: true, name: "name" } as AccountInfo,
         });
         kdfConfigService.getKdfConfig$
           .calledWith(userId)

@@ -25,11 +25,7 @@ import { deepFreeze } from "@bitwarden/common/tools/util";
 import { UserId } from "@bitwarden/common/types/guid";
 import { BitwardenClient } from "@bitwarden/sdk-internal";
 
-import {
-  FakeAccountService,
-  FakeStateProvider,
-  mockAccountInfoWith,
-} from "../../../../../common/spec";
+import { FakeAccountService, FakeStateProvider } from "../../../../../common/spec";
 import { Algorithm, AlgorithmsByType, CredentialAlgorithm, Type, Types } from "../metadata";
 import catchall from "../metadata/email/catchall";
 import plusAddress from "../metadata/email/plus-address";
@@ -44,10 +40,9 @@ import { GeneratorMetadataProvider } from "./generator-metadata-provider";
 const SomeUser = "some user" as UserId;
 const SomeAccount = {
   id: SomeUser,
-  ...mockAccountInfoWith({
-    email: "someone@example.com",
-    name: "Someone",
-  }),
+  email: "someone@example.com",
+  emailVerified: true,
+  name: "Someone",
 };
 const SomeAccount$ = new BehaviorSubject<Account>(SomeAccount);
 

@@ -10,7 +10,6 @@ import { ProviderUserType } from "@bitwarden/common/admin-console/enums";
 import { Provider } from "@bitwarden/common/admin-console/models/domain/provider";
 import { AccountService } from "@bitwarden/common/auth/abstractions/account.service";
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 import { ToastService } from "@bitwarden/components";
 import { newGuid } from "@bitwarden/guid";
@@ -42,10 +41,9 @@ describe("Provider Permissions Guard", () => {
 
     accountService.activeAccount$ = of({
       id: mockUserId,
-      ...mockAccountInfoWith({
-        email: "test@example.com",
-        name: "Test User",
-      }),
+      email: "test@example.com",
+      emailVerified: true,
+      name: "Test User",
     });
 
     route = mock<ActivatedRouteSnapshot>({

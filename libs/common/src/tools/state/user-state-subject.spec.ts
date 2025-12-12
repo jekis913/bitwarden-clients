@@ -6,7 +6,6 @@ import {
   awaitAsync,
   FakeAccountService,
   FakeStateProvider,
-  mockAccountInfoWith,
   ObservableTracker,
 } from "../../../spec";
 import { Account } from "../../auth/abstractions/account.service";
@@ -24,19 +23,17 @@ import { UserStateSubject } from "./user-state-subject";
 const SomeUser = "some user" as UserId;
 const SomeAccount = {
   id: SomeUser,
-  ...mockAccountInfoWith({
-    email: "someone@example.com",
-    name: "Someone",
-  }),
+  email: "someone@example.com",
+  emailVerified: true,
+  name: "Someone",
 };
 const SomeAccount$ = new BehaviorSubject<Account>(SomeAccount);
 
 const SomeOtherAccount = {
   id: "some other user" as UserId,
-  ...mockAccountInfoWith({
-    email: "someone@example.com",
-    name: "Someone",
-  }),
+  email: "someone@example.com",
+  emailVerified: true,
+  name: "Someone",
 };
 
 type TestType = { foo: string };

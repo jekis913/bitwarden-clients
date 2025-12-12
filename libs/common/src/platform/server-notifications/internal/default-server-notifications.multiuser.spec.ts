@@ -7,7 +7,6 @@ import { InternalPolicyService } from "@bitwarden/common/admin-console/abstracti
 import { AuthRequestAnsweringServiceAbstraction } from "@bitwarden/common/auth/abstractions/auth-request-answering/auth-request-answering.service.abstraction";
 import { FeatureFlag } from "@bitwarden/common/enums/feature-flag.enum";
 
-import { mockAccountInfoWith } from "../../../../spec";
 import { AccountService } from "../../../auth/abstractions/account.service";
 import { AuthService } from "../../../auth/abstractions/auth.service";
 import { AuthenticationStatus } from "../../../auth/enums/authentication-status";
@@ -164,10 +163,9 @@ describe("DefaultServerNotificationsService (multi-user)", () => {
     } else {
       activeUserAccount$.next({
         id: userId,
-        ...mockAccountInfoWith({
-          email: "email",
-          name: "Test Name",
-        }),
+        email: "email",
+        name: "Test Name",
+        emailVerified: true,
       });
     }
   }
@@ -176,10 +174,7 @@ describe("DefaultServerNotificationsService (multi-user)", () => {
     const currentAccounts = (userAccounts$.getValue() as Record<string, any>) ?? {};
     userAccounts$.next({
       ...currentAccounts,
-      [userId]: mockAccountInfoWith({
-        email: "email",
-        name: "Test Name",
-      }),
+      [userId]: { email: "email", name: "Test Name", emailVerified: true },
     } as any);
   }
 

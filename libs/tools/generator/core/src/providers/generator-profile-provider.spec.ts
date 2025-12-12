@@ -15,12 +15,7 @@ import { UserStateSubjectDependencyProvider } from "@bitwarden/common/tools/stat
 import { StateConstraints } from "@bitwarden/common/tools/types";
 import { OrganizationId, PolicyId, UserId } from "@bitwarden/common/types/guid";
 
-import {
-  FakeStateProvider,
-  FakeAccountService,
-  awaitAsync,
-  mockAccountInfoWith,
-} from "../../../../../common/spec";
+import { FakeStateProvider, FakeAccountService, awaitAsync } from "../../../../../common/spec";
 import { CoreProfileMetadata, ProfileContext } from "../metadata/profile-metadata";
 import { GeneratorConstraints } from "../types";
 
@@ -36,25 +31,21 @@ const UnverifiedEmailUser = "UnverifiedEmailUser" as UserId;
 const accounts: Record<UserId, Account> = {
   [SomeUser]: {
     id: SomeUser,
-    ...mockAccountInfoWith({
-      name: "some user",
-      email: "some.user@example.com",
-    }),
+    name: "some user",
+    email: "some.user@example.com",
+    emailVerified: true,
   },
   [AnotherUser]: {
     id: AnotherUser,
-    ...mockAccountInfoWith({
-      name: "some other user",
-      email: "some.other.user@example.com",
-    }),
+    name: "some other user",
+    email: "some.other.user@example.com",
+    emailVerified: true,
   },
   [UnverifiedEmailUser]: {
     id: UnverifiedEmailUser,
-    ...mockAccountInfoWith({
-      name: "a user with an unverfied email",
-      email: "unverified@example.com",
-      emailVerified: false,
-    }),
+    name: "a user with an unverfied email",
+    email: "unverified@example.com",
+    emailVerified: false,
   },
 };
 const accountService = new FakeAccountService(accounts);

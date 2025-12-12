@@ -10,7 +10,6 @@ import { AuditService } from "@bitwarden/common/abstractions/audit.service";
 import { AccountInfo, AccountService } from "@bitwarden/common/auth/abstractions/account.service";
 import { BreachAccountResponse } from "@bitwarden/common/dirt/models/response/breach-account.response";
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { UserId } from "@bitwarden/common/types/guid";
 
 import { BreachReportComponent } from "./breach-report.component";
@@ -39,10 +38,9 @@ describe("BreachReportComponent", () => {
   let accountService: MockProxy<AccountService>;
   const activeAccountSubject = new BehaviorSubject<{ id: UserId } & AccountInfo>({
     id: "testId" as UserId,
-    ...mockAccountInfoWith({
-      email: "test@example.com",
-      name: "Test User",
-    }),
+    email: "test@example.com",
+    emailVerified: true,
+    name: "Test User",
   });
 
   beforeEach(async () => {

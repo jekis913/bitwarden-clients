@@ -16,7 +16,6 @@ import { EnvironmentService } from "@bitwarden/common/platform/abstractions/envi
 import { I18nService } from "@bitwarden/common/platform/abstractions/i18n.service";
 import { LogService } from "@bitwarden/common/platform/abstractions/log.service";
 import { PlatformUtilsService } from "@bitwarden/common/platform/abstractions/platform-utils.service";
-import { mockAccountInfoWith } from "@bitwarden/common/spec";
 import { SendType } from "@bitwarden/common/tools/send/enums/send-type";
 import { SendView } from "@bitwarden/common/tools/send/models/view/send.view";
 import { SendApiService } from "@bitwarden/common/tools/send/services/send-api.service.abstraction";
@@ -97,10 +96,9 @@ describe("SendV2Component", () => {
           useValue: {
             activeAccount$: of({
               id: "123",
-              ...mockAccountInfoWith({
-                email: "test@email.com",
-                name: "Test User",
-              }),
+              email: "test@email.com",
+              emailVerified: true,
+              name: "Test User",
             }),
           },
         },
