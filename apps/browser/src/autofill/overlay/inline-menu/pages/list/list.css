@@ -1,5 +1,13 @@
 @import "../../../../../../../../libs/components/src/tw-theme-variables.css";
 
+:root {
+  --inline-menu-scrollbar-track: #fcfcfc;
+}
+
+.theme_dark {
+  --inline-menu-scrollbar-track: #2d323a;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -114,7 +122,7 @@ body * {
   max-height: 18rem;
   -ms-overflow-style: none;
   scrollbar-width: thin;
-  scrollbar-color: rgb(var(--color-secondary-300)) rgb(var(--color-background-alt));
+  scrollbar-color: rgb(var(--color-secondary-300)) var(--inline-menu-scrollbar-track);
   border-right-color: rgb(var(--color-secondary-300));
 }
 
